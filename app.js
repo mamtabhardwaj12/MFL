@@ -25,7 +25,7 @@ app.use(bodyParser.json(), function (req, res, next) {
   // if (allowedOrigins.indexOf(origin) > -1) {
   //   res.setHeader('Access-Control-Allow-Origin', origin);
   // }
-  // res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Origin', "http://localhost:10010/api-docs");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-HMAC-HASH, X-MICRO-TIME");
   res.header("Access-Control-Expose-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-HMAC-HASH, X-MICRO-TIME");
