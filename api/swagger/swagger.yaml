@@ -345,6 +345,31 @@ paths:
             $ref: "#/definitions/apiResponse"
         400:
           description: Validation error 
+  /login:
+    x-swagger-router-controller: LoginController
+    post:
+      tags:
+      - "Registration"
+      summary: "On-boarding organisation"
+      description: ""
+      operationId: "createOrg"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here you can create Organisations"
+          required: true
+          schema:
+            $ref: "#/definitions/orgRegistration"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error
+  
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
