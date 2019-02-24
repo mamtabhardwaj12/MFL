@@ -42,6 +42,126 @@ paths:
   #         description: Error
   #         schema:
   #           $ref: "#/definitions/ErrorResponse"
+  /bankRegistration:
+    x-swagger-router-controller: bankRegistration
+    post:
+      tags:
+      - "Registration"
+      summary: "On-boarding banks"
+      description: ""
+      operationId: "createBank"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here you can create banks"
+          required: true
+          schema:
+            $ref: "#/definitions/bankRegistration"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error
+  /orgRegistration:
+    x-swagger-router-controller: orgRegistration
+    post:
+      tags:
+      - "Registration"
+      summary: "On-boarding organisation"
+      description: ""
+      operationId: "createOrg"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here you can create Organisations"
+          required: true
+          schema:
+            $ref: "#/definitions/orgRegistration"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error
+  /userRegistration/borrower:
+    x-swagger-router-controller: borrowerUserRegistration
+    post:
+      tags:
+      - "Registration"
+      summary: "Create user for organisation"
+      description: ""
+      operationId: "createOrgUser"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here you can create the new account"
+          required: true
+          schema:
+            $ref: "#/definitions/borrowerUserRegistration"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error
+  /userRegistration/bankUser:
+    x-swagger-router-controller: bankUserRegistration
+    post:
+      tags:
+      - "Registration"
+      summary: "Create user for organisation"
+      description: ""
+      operationId: "createBankUser"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here you can create the new account"
+          required: true
+          schema:
+            $ref: "#/definitions/bankUserRegistration"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error 
+  /login:
+    x-swagger-router-controller: LoginController
+    post:
+      tags:
+      - "Login"
+      summary: "Login for users"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Here the user can log in"
+          required: true
+          schema:
+            $ref: "#/definitions/login"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/apiResponse"
+        400:
+          description: Validation error
   /invoice:
     x-swagger-router-controller: InvoiceController
     post:
@@ -249,110 +369,6 @@ paths:
           description: "Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /bankRegistration:
-    x-swagger-router-controller: bankRegistration
-    post:
-      tags:
-      - "Registration"
-      summary: "On-boarding banks"
-      description: ""
-      operationId: "createBank"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Here you can create banks"
-          required: true
-          schema:
-            $ref: "#/definitions/bankRegistration"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/apiResponse"
-        400:
-          description: Validation error
-  /orgRegistration:
-    x-swagger-router-controller: orgRegistration
-    post:
-      tags:
-      - "Registration"
-      summary: "On-boarding organisation"
-      description: ""
-      operationId: "createOrg"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Here you can create Organisations"
-          required: true
-          schema:
-            $ref: "#/definitions/orgRegistration"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/apiResponse"
-        400:
-          description: Validation error
-  /userRegistration/borrower:
-    x-swagger-router-controller: borrowerUserRegistration
-    post:
-      tags:
-      - "Registration"
-      summary: "Create user for organisation"
-      description: ""
-      operationId: "createOrgUser"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Here you can create the new account"
-          required: true
-          schema:
-            $ref: "#/definitions/borrowerUserRegistration"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/apiResponse"
-        400:
-          description: Validation error
-  /userRegistration/bankUser:
-    x-swagger-router-controller: bankUserRegistration
-    post:
-      tags:
-      - "Registration"
-      summary: "Create user for organisation"
-      description: ""
-      operationId: "createBankUser"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Here you can create the new account"
-          required: true
-          schema:
-            $ref: "#/definitions/bankUserRegistration"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/apiResponse"
-        400:
-          description: Validation error 
-  /login:
-    x-swagger-router-controller: LoginController
-    post:
-      tags:
-      - "Registration"
-      summary: "On-boarding organisation"
-      description: ""
-      operationId: "createOrg"
   /applyLoan:
     x-swagger-router-controller: applyLoan
     post:
@@ -369,7 +385,7 @@ paths:
           description: "Here you can apply loan on saved invoices"
           required: true
           schema:
-            $ref: "#/definitions/applyloan"
+            $ref: "#/definitions/applyLoan"
       responses:
         200:
           description: "successful operation"
@@ -391,6 +407,14 @@ definitions:
       quantity:
         type: "number"
         format: "int64"
+  login:
+    properties:
+      appName:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
   invoice:
     type: "object"
     properties:
@@ -419,7 +443,7 @@ definitions:
       isActive:
         type: boolean
         default: true
-  applyloan:
+  applyLoan:
     properties:
       id:
         type: string

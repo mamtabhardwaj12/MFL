@@ -12,7 +12,7 @@ exports.loginUser = function (body) {
     var deferred = Q.defer();
 
     request.post({
-        url:  'http://localhost:8084' + '/login',
+        url:  'http://localhost:8082' + '/login',
         form: body,
         json: true
     }, function (error, response, body) {
