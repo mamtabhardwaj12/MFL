@@ -25,14 +25,6 @@
     },
     "emailException": {
         "code": 409,
-        "message": "email already exist"
-    },
-    "usernameException": {
-        "code": 404,
-        "message": "username already exist"
-    },
-    "emailException": {
-        "code": 409,
         "message": "Email already exist"
     },
     "usernameException": {

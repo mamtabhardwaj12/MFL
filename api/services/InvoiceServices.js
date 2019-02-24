@@ -80,3 +80,20 @@ exports.updateInvoiceStatus = function (id, body) {
     //  Update (Store data in MongoDB)
     return crud.updateData(config.connectionString, config.dbName, collectionName, body, condition, paramNotReq);
   }
+
+//Delete invoice by invoice number
+  exports.deleteInvoice = function (id, status) {
+    var deferred = Q.defer();
+    var condition = {};
+    var data = {};
+    condition["id"] = id;
+    data["status"] = status;
+    //  Delete (Delete data from MongoDB)
+    if (id) {
+      return crud.updateData(config.connectionString, config.dbName, collectionName, data, condition, paramNotReq);
+    }
+    else {
+  
+      return exception.invalid;
+    }
+  }
