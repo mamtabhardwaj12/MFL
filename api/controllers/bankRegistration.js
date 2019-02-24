@@ -28,6 +28,7 @@ module.exports = {
     createBank: createBank
 };
 
+var bankRegister = require('../services/bankRegistrationService');
 /*
   Functions in a127 controllers used for operations should take two parameters:
 
@@ -36,9 +37,19 @@ module.exports = {
  */
 function createBank(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var name = req.swagger.params.name.value || 'stranger';
-  var hello = util.format('Hello, %s!', name);
+//   console.log("Request:",req.body);
+  bankRegister.bankRegister(req.body).then(function (response) {
+    res.json(response);
+  })
+    .catch(function (response) {
+
+      var statusCode = response.statusCode;
+      var msg = response.message;
+      res.status(statusCode).send({ message: msg });
+    });;
+//   var name = req.swagger.params.name.value || 'stranger';
+//   var hello = util.format('Hello, %s!', name);
 
   // this sends back a JSON response which is a single string
-  res.json(hello);
+//   res.json(hello);
 }
