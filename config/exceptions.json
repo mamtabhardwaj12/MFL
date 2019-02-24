@@ -21,7 +21,7 @@
     },
     "mobNumberException": {
         "code": 409,
-        "message": "Contact number already exist"
+        "message": "contact number already exist"
     },
     "emailException": {
         "code": 409,
@@ -42,6 +42,10 @@
     "invalidInput": {
         "code": 418,
         "message": "invalid input"
+    },
+    "IDException": {
+        "code": 404,
+        "message": "ID already exist"
     },
     "userNotActivated": {
         "code": 419,

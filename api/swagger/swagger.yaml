@@ -18,28 +18,235 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
+  # /hello:
+  #   # binds a127 app logic to a route
+  #   x-swagger-router-controller: hello_world
+  #   get:
+  #     description: Returns 'Hello' to the caller
+  #     # used as the method name of the controller
+  #     operationId: hello
+  #     parameters:
+  #       - name: name
+  #         in: query
+  #         description: The name of the person to whom to say hello
+  #         required: false
+  #         type: string
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           # a pointer to a definition
+  #           $ref: "#/definitions/HelloWorldResponse"
+  #       # responses may fall through to errors
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  /invoice:
+    x-swagger-router-controller: InvoiceController
+    post:
+      tags:
+      - "Invoice"
+      description: ""
+      operationId: invoice
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      - in: "body"
+        name: "body"
+        description: "Invoice created"
+        required: true
+        schema:
+          $ref: "#/definitions/invoice"
       responses:
-        "200":
-          description: Success
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        405:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        409:
+          description: "Conflict"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+      - "Invoice"
+      summary: "This is used to update invoice for given invoice number"
+      description: ""
+      operationId: "updateInvoice"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: id
+        in: query
+        description: ""
+        required: false
+        type: string
+      - in: "body"
+        name: "body"
+        description: "Update invoice data"
+        required: true
+        schema:
+          $ref: "#/definitions/invoice"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid Invoice ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Invoice not found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        405:
+          description: "Validation exception"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags:
+      - "Invoice"
+      summary: "Using this service invoice is delete for given invoice number"
+      description: ""
+      operationId: "deleteInvoice"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: status
+        description: ""
+        type: string
+        in: query
+        required: true
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid Invoice ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Invoice not found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    patch:
+      tags:
+      - "Invoice"
+      summary: "This service is used to update the status of invoice after invoice is accepted"
+      description: ""
+      operationId: "updateInvoiceStatus"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - name: id
+          in: query
+          description: ""
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: "For eg; status = Accepted/Discard"
+          required: true
+          schema:
+              # a pointer to a definition
+              $ref: "#/definitions/patchBody"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid challan ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Challan not found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        405:
+          description: "Validation exception"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      tags:
+      - "Invoice"
+      description: ""
+      # used as the method name of the controller
+      operationId: "getInvoice"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: searchBy
+        in: query
+        description: "search by id"
+        required: false
+        type: string
+      - name: sortBy
+        in: query
+        description: "sort by name"
+        required: false
+        type: string
+      - name: supplierId
+        in: query
+        description: "search by supplier Id"
+        required: false
+        type: string
+      responses:
+        200:
+          description: "Success"
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid Input"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Invoice not found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         # responses may fall through to errors
         default:
-          description: Error
+          description: "Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
   /bankRegistration:
@@ -137,18 +344,73 @@ paths:
           schema:
             $ref: "#/definitions/apiResponse"
         400:
-          description: Validation error
-            
+          description: Validation error 
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  product:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      productName:
+        type: "string"
+      quantity:
+        type: "number"
+        format: "int64"
+  invoice:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      supplierName:
+        type: "string"
+      supplierId:
+        type: "string"
+      invoiceDate:
+        type: "string"
+      invoiceNumber:
+        type: string
+      gstNumber:
+        type: string
+      amount:
+        type: number
+      tax: 
+        type: number
+      product:
+        type: "array"
+        items:
+          $ref: "#/definitions/product"
+      status:
+        type: "string"
+      isActive:
+        type: boolean
+        default: true
+  patchBody:
+    type: object
+    properties:
+      status:
+        type: string
+      reason:
+        type: string
+  # HelloWorldResponse:
+  #   required:
+  #     - message
+  #   properties:
+  #     message:
+  #       type: "string"
+  ApiResponse:
     required:
       - message
     properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
       message:
-        type: string
+        type: "string"
   bankUserRegistration:
     properties:
       id:
@@ -193,7 +455,6 @@ definitions:
           type: string
       mobile:
         type: "string"
-      
   bankRegistration:
     properties:
       id:
@@ -217,7 +478,7 @@ definitions:
       gstNo:
         type: string
       email:
-          type: string
+        type: string
       natureOfBusinessId:
         type: integer
       natureOfBusinessName:
