@@ -9,8 +9,10 @@
   "main": "app.js",
   "dependencies": {
     "app-root-path": "^2.1.0",
+    "crud-sdk": "0.0.29",
     "express": "^4.12.3",
     "morgan": "^1.9.1",
+    "q": "^1.5.1",
     "swagger-express-mw": "^0.1.0",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1",
