@@ -25,20 +25,20 @@ var util = require('util');
   we specify that in the exports of this module that 'hello' maps to the function named 'hello'
  */
 module.exports = {
-    createBank: createBank
+    createOrg: createOrg
 };
 
-var bankRegister = require('../services/bankRegistrationService');
+var orgRegister = require('../services/orgRegistrationService');
 /*
   Functions in a127 controllers used for operations should take two parameters:
 
   Param 1: a handle to the request object
   Param 2: a handle to the response object
  */
-function createBank(req, res) {
+function createOrg(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
 //   console.log("Request:",req.body);
-  bankRegister.bankRegister(req.body).then(function (response) {
+  orgRegister.orgRegister(req.body).then(function (response) {
     res.json(response);
   })
     .catch(function (response) {

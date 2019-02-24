@@ -1,15 +1,22 @@
 'use strict';
 
 var util = require('util');
-var bankUserRegService = require('../services/bankUserRegService');
+var LoginService = require('../services/LoginService');
 
 module.exports = {
-    createBankUser: createBankUser
+    loginUser: loginUser
 };
 
-function createBankUser(req, res) {
+/*
+  Functions in a127 controllers used for operations should take two parameters:
+
+  Param 1: a handle to the request object
+  Param 2: a handle to the response object
+ */
+function loginUser(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  bankUserRegService.bankUser(req.body).then(function (response) {
+//   console.log("Req:",req.body);
+LoginService.loginUser(req.body).then(function (response) {
     res.json(response);
   })
     .catch(function (response) {
