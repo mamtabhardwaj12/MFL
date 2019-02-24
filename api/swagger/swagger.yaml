@@ -374,7 +374,6 @@ paths:
           description: "Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
-<<<<<<< HEAD
   /invoice/{id}:
     x-swagger-router-controller: InvoiceController
     get:
@@ -406,10 +405,6 @@ paths:
             $ref: "#/definitions/ErrorResponse"
   /bankRegistration:
     x-swagger-router-controller: bankRegistration
-=======
-  /applyLoan:
-    x-swagger-router-controller: applyLoan
->>>>>>> 910ed7d474116cf91b6c0e8f8b7680e149e21855
     post:
       tags:
       - "Apply Loan"

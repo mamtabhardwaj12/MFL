@@ -122,7 +122,6 @@
 			"400": {
 			  "description": "Validation error"
 			}
-<<<<<<< HEAD
 		},
 		"/invoice/{id}": {
 			"x-swagger-router-controller": "InvoiceController",
@@ -201,32 +200,6 @@
 						"description": "Validation error"
 					}
 				}
-=======
-		  }
-		}
-	  },
-	  "/userRegistration/bankUser": {
-		"x-swagger-router-controller": "bankUserRegistration",
-		"post": {
-		  "tags": [
-			"Registration"
-		  ],
-		  "summary": "Create user for organisation",
-		  "description": "",
-		  "operationId": "createBankUser",
-		  "produces": [
-			"application/json"
-		  ],
-		  "parameters": [
-			{
-			  "in": "body",
-			  "name": "body",
-			  "description": "Here you can create the new account",
-			  "required": true,
-			  "schema": {
-				"$ref": "#/definitions/bankUserRegistration"
-			  }
->>>>>>> 910ed7d474116cf91b6c0e8f8b7680e149e21855
 			}
 		  ],
 		  "responses": {
