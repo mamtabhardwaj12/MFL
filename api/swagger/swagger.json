@@ -122,30 +122,84 @@
 			"400": {
 			  "description": "Validation error"
 			}
-		  }
-		}
-	  },
-	  "/userRegistration/bankUser": {
-		"x-swagger-router-controller": "bankUserRegistration",
-		"post": {
-		  "tags": [
-			"Registration"
-		  ],
-		  "summary": "Create user for organisation",
-		  "description": "",
-		  "operationId": "createBankUser",
-		  "produces": [
-			"application/json"
-		  ],
-		  "parameters": [
-			{
-			  "in": "body",
-			  "name": "body",
-			  "description": "Here you can create the new account",
-			  "required": true,
-			  "schema": {
-				"$ref": "#/definitions/bankUserRegistration"
-			  }
+		},
+		"/invoice/{id}": {
+			"x-swagger-router-controller": "InvoiceController",
+			"get": {
+				"tags": [
+					"Invoice"
+				],
+				"summary": "Get Invoice by ID",
+				"description": "",
+				"operationId": "getInvoiceById",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/ApiResponse"
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/bankRegistration": {
+			"x-swagger-router-controller": "bankRegistration",
+			"post": {
+				"tags": [
+					"Registration"
+				],
+				"summary": "On-boarding banks",
+				"description": "",
+				"operationId": "createBank",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Here you can create banks",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/bankRegistration"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/apiResponse"
+						}
+					},
+					"400": {
+						"description": "Validation error"
+					}
+				}
 			}
 		  ],
 		  "responses": {

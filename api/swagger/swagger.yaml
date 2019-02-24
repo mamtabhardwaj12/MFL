@@ -331,6 +331,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      # - name: invoiceNumber
+      #   in: query
+      #   description: ""
+      #   required: true
+      #   type: string
       - name: searchBy
         in: query
         description: "search by id"
@@ -369,8 +374,37 @@ paths:
           description: "Error"
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /applyLoan:
-    x-swagger-router-controller: applyLoan
+  /invoice/{id}:
+    x-swagger-router-controller: InvoiceController
+    get:
+      tags:
+      - "Invoice" 
+      summary: "Get Invoice by ID"
+      description: ""
+      operationId: "getInvoiceById"
+      produces:
+      - "application/json"
+      parameters:
+        - name: id
+          in: path
+          description: ""
+          required: true
+          type: string
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /bankRegistration:
+    x-swagger-router-controller: bankRegistration
     post:
       tags:
       - "Apply Loan"
