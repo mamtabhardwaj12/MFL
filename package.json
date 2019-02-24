@@ -13,6 +13,7 @@
     "express": "^4.12.3",
     "morgan": "^1.9.1",
     "q": "^1.5.1",
+    "request": "^2.88.0",
     "swagger-express-mw": "^0.1.0",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1",

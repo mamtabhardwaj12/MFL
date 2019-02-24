@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"swagger": "2.0",
 	"info": {
 		"version": "0.0.1",
@@ -421,3 +422,370 @@
 		}
 	}
 }
+=======
+    "swagger": "2.0",
+    "info": {
+      "version": "0.0.1",
+      "title": "Multi-Funding Loan"
+    },
+    "host": "localhost:10010",
+    "basePath": "/MFL",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/hello": {
+        "x-swagger-router-controller": "hello_world",
+        "get": {
+          "description": "Returns 'Hello' to the caller",
+          "operationId": "hello",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "query",
+              "description": "The name of the person to whom to say hello",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/HelloWorldResponse"
+              }
+            },
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/bankRegistration": {
+        "x-swagger-router-controller": "bankRegistration",
+        "post": {
+          "tags": [
+            "Registration"
+          ],
+          "summary": "On-boarding banks",
+          "description": "",
+          "operationId": "createBank",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Here you can create banks",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/bankRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/apiResponse"
+              }
+            },
+            "400": {
+              "description": "Validation error"
+            }
+          }
+        }
+      },
+      "/orgRegistration": {
+        "x-swagger-router-controller": "orgRegistration",
+        "post": {
+          "tags": [
+            "Registration"
+          ],
+          "summary": "On-boarding organisation",
+          "description": "",
+          "operationId": "createOrg",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Here you can create Organisations",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/orgRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/apiResponse"
+              }
+            },
+            "400": {
+              "description": "Validation error"
+            }
+          }
+        }
+      },
+      "/userRegistration/borrower": {
+        "x-swagger-router-controller": "borrowerUserRegistration",
+        "post": {
+          "tags": [
+            "Registration"
+          ],
+          "summary": "Create user for organisation",
+          "description": "",
+          "operationId": "createOrgUser",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Here you can create the new account",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/borrowerUserRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/apiResponse"
+              }
+            },
+            "400": {
+              "description": "Validation error"
+            }
+          }
+        }
+      },
+      "/userRegistration/bankUser": {
+        "x-swagger-router-controller": "bankUserRegistration",
+        "post": {
+          "tags": [
+            "Registration"
+          ],
+          "summary": "Create user for organisation",
+          "description": "",
+          "operationId": "createBankUser",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Here you can create the new account",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/bankUserRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/apiResponse"
+              }
+            },
+            "400": {
+              "description": "Validation error"
+            }
+          }
+        }
+      },
+      "/swagger": {
+        "x-swagger-pipe": "swagger_raw"
+      }
+    },
+    "definitions": {
+      "HelloWorldResponse": {
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "bankUserRegistration": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "designation": {
+            "type": "string",
+            "format": "string"
+          },
+          "contactNo": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "borrowerUserRegistration": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "orgName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          }
+        }
+      },
+      "bankRegistration": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "headQuarters": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "orgRegistration": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "orgName": {
+            "type": "string"
+          },
+          "gstNo": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "natureOfBusinessId": {
+            "type": "integer"
+          },
+          "natureOfBusinessName": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankAccountNo": {
+            "type": "string"
+          },
+          "ifsc": {
+            "type": "string"
+          }
+        }
+      },
+      "apiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 0,
+          "type": "type",
+          "message": "message"
+        }
+      },
+      "ErrorResponse": {
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+>>>>>>> f204709bf64ff076270fc6e1fc7f4b83fe21f62b

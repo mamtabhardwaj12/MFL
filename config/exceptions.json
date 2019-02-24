@@ -21,6 +21,7 @@
     },
     "mobNumberException": {
         "code": 409,
+<<<<<<< HEAD
         "message": "contact number already exist"
     },
     "emailException": {
@@ -30,6 +31,17 @@
     "usernameException": {
         "code": 404,
         "message": "username already exist"
+=======
+        "message": "Contact number already exist"
+    },
+    "emailException": {
+        "code": 409,
+        "message": "Email already exist"
+    },
+    "usernameException": {
+        "code": 409,
+        "message": "Username already exist"
+>>>>>>> f204709bf64ff076270fc6e1fc7f4b83fe21f62b
     },
     "unavailable": {
         "code": 503,
@@ -43,8 +55,26 @@
         "code": 418,
         "message": "invalid input"
     },
+<<<<<<< HEAD
     "IDException": {
         "code": 404,
         "message": "ID already exist"
+=======
+    "userNotActivated": {
+        "code": 419,
+        "message": "User need to Accept Aggrement"
+    },
+    "OrgNotValid": {
+        "code": 420,
+        "message": "Organisation not Approved"
+    },
+    "InvalidEmail": {
+        "code": 421,
+        "message": "Invalid Email Address"
+    },
+    "POException": {
+        "code": 422,
+        "message": "PO Number already exist"
+>>>>>>> f204709bf64ff076270fc6e1fc7f4b83fe21f62b
     }
 }
