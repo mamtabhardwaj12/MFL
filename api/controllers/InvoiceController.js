@@ -7,7 +7,9 @@ module.exports = {
     invoice: invoice,   
     updateInvoice: updateInvoice,
     deleteInvoice: deleteInvoice,
-    updateInvoiceStatus: updateInvoiceStatus
+    updateInvoiceStatus: updateInvoiceStatus,
+    getInvoice: getInvoice,
+    getInvoiceById: getInvoiceById,
 }
 
 
@@ -15,7 +17,7 @@ module.exports = {
 function invoice(req, res, next) {
     var body = req.body;
       body.date = new Date();
-     // body["invoiceNumber"] = generateId();
+      body["invoiceNumber"] = generateId();
     //   var advPaymentRate = 0.8;
     //   var advPayment = body.netInvoiceAmount * advPaymentRate;
     //   var avlLimit = body.availableLimit;
@@ -34,10 +36,10 @@ function invoice(req, res, next) {
         });
 };
 
-// function generateId() {
-//   var id = config.invoice + Date.now();
-//   return id;
-// }
+function generateId() {
+  var id = config.invoice + Date.now();
+  return id;
+}
 
 
 //  Update Invoice
@@ -88,19 +90,51 @@ function deleteInvoice(req, res, next) {
         });  
   };
 
-// function getInvoice(req, res, next) {
- 
-//       var sort = req.swagger.params.sortBy.value || config.sortBy;
-//       var searchBy = req.swagger.params.searchBy.value;
-//       var supplierId = req.swagger.params.supplierId.value;
-//       InvoiceService.getInvoice(sort, searchBy,supplierId)
-//         .then(function (response) {
-//           res.json(response);
-//         })
-//         .catch(function (response) {
+function getInvoice(req, res, next) {
+
+      // var invoiceNumber = req.swagger.params.invoiceNumber.value;
+      var sort = req.swagger.params.sortBy.value || config.sortBy;
+      var searchBy = req.swagger.params.searchBy.value;
+      var supplierId = req.swagger.params.supplierId.value;
+      InvoiceService.getInvoice(sort, searchBy,supplierId)
+        .then(function (response) {
+          res.json(response);
+        })
+        .catch(function (response) {
   
-//           res.json(response);
+          res.json(response);
   
-//         });
-//   };
+        });
+  };
+
+  function getInvoiceById(req, res, next) {
+  
+        var id = req.swagger.params.id.value;
+        InvoiceService.getInvoiceById(req,id)
+          .then(function (response) {
+            res.json(response[0]);
+          })
+          .catch(function (response) {
+            var statusCode = response.statusCode;
+            var msg = response.message;
+            res.status(statusCode).send({ message: msg });
+          });
+  };
+
+//   function getInvoiceByInvoiceNumber(req, res, next) {
+  
+//     var invoiceNumber = req.swagger.params.invoiceNumber.value;
+
+//     InvoiceService.getInvoiceByInvoiceNumber(req,invoiceNumber)
+//       .then(function (response) {
+       
+//         res.json(response[0]);
+//       })
+//       .catch(function (response) {
+//         var statusCode = response.statusCode;
+//         var msg = response.message;
+//         res.status(statusCode).send({ message: msg });
+//       });
+// };
+  
 

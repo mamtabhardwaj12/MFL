@@ -72,6 +72,11 @@ exports.updateInvoice = function(req, id, body) {
     return deferred.promise;
 }
 
+function generateId() {
+  var id = config.invoice + Date.now();
+  return id;
+}
+
 // Update an existing invoice singal value
 
 exports.updateInvoiceStatus = function (id, body) {
@@ -99,3 +104,97 @@ exports.updateInvoiceStatus = function (id, body) {
       return exception.invalid;
     }
   }
+
+
+  exports.getInvoice = function (sort, searchBy, supplierId) {
+    var deferred = Q.defer();
+    var condition = {};
+  
+    if (searchBy) {
+      var filter = JSON.parse(searchBy);
+      var data1 = {};
+      var data2 = {};
+      var data3 = {};
+  
+      data1 = filter[0];
+      data2 = filter[1];
+      data3 = filter[2];
+  
+      condition[data1.key] = data1.value;
+      condition[data2.key] = data2.value;
+      condition["status"] = "Approved";
+    }
+  
+    if (sort) {
+      var sortBy = sort.split("_")[0];
+      var value = sort.split("_")[1];
+      if (value === "asc") {
+        var sortValue = 1;
+      } else if (value === "desc") {
+        var sortValue = -1;
+      } else {
+        res.json(exception.badRequest);
+      }
+    }
+    var sortField = {};
+    var sortBy = sortBy;
+    sortField[sortBy] = sortValue;
+  
+    if (supplierId) {
+      scf.log("supplierId =>>", supplierId);
+      condition["supplierId"] = supplierId;
+    }
+  
+    if (searchBy == null && supplierId == null) {
+      condition["status"] = { '$ne': "Discard" };
+    }
+  
+    return crud.getData(config.connectionString, config.dbName, collectionName, condition, sortField, paramNotReq);
+  }
+
+  // exports.getInvoice = function(req, id) {
+
+  //   if(id = id) {
+  //     console.log("Invoice already exist");
+  //   } else {
+  //     req.send(err);
+  //   }
+  // }
+
+  // get data by id
+
+exports.getInvoiceById = function (req,id) {
+  var condition = {};
+  if (id) {
+    condition["id"] = id;
+  }
+  var paramNotReq = {
+    _id: 0
+  };
+  var sortField = {};
+  //return baseService.fetchPermissionEnabledDocuments(req,collectionName,condition, sortField, paramNotReq);
+    
+  //  Get (Get data from MongoDB)
+  return crud.getData(config.connectionString, config.dbName, collectionName, condition, sortField, paramNotReq);
+
+}
+
+
+// exports.getInvoiceByInvoiceNumber = function (req, invoiceNumber) {
+//   var condition = {};
+
+//   if (invoiceNumber && invoiceNumber == null) {
+//     condition["invoiceNumber"] = invoiceNumber;
+//     condition["status"] = { '$ne': "Discard" };
+//   }
+
+//   var paramNotReq = {
+//     _id: 0
+//   };
+//   var sortField = {};
+
+//   //  Read (Read data from MongoDB)
+//   return baseService.fetchPermissionEnabledDocuments(req,collectionName,condition, sortField, paramNotReq);
+//   // return crud.getData(config.connectionString, config.dbName, collectionName, condition, sortField, paramNotReq)
+// }
+  
