@@ -3,11 +3,13 @@
 var config = require('../../config/config.json');
 var Q = require('q');
 var collectionName = 'Invoice';
-var crud = require('../utils/CrudServices');
+var crud = require('../utils/CrudService');
 
+//var baseService = require('./BaseService');
 var MODULES = require('../helpers/module');
 const STATUSCODES=MODULES.STATUSCODES();
 var paramNotReq = {};
+
 
 
 exports.invoice = function (req, body) {
@@ -106,12 +108,25 @@ exports.updateInvoiceStatus = function (id, body) {
   }
 
 
-  exports.getInvoice = function (sort, searchBy, supplierId) {
+  exports.getInvoice = function (invoiceNumber, sort, searchBy) {
     var deferred = Q.defer();
     var condition = {};
-  
+
+
+    // if(invoiceNumber.length){
+    //   console.log('Name exists already',null);
+    // }
+    
+    condition["invoiceNumber"] = invoiceNumber;
+    crud.readByCondition(config.connectionString, config.dbName, collectionName, condition, paramNotReq)
+    .then(data => {
+      deferred.resolve(data)
+        }) .catch(err => {
+        deferred.reject(err)
+        })
+    
     if (searchBy) {
-      var filter = JSON.parse(searchBy);
+      var filter = searchBy.invoiceNumber;
       var data1 = {};
       var data2 = {};
       var data3 = {};
@@ -136,20 +151,20 @@ exports.updateInvoiceStatus = function (id, body) {
         res.json(exception.badRequest);
       }
     }
-    var sortField = {};
-    var sortBy = sortBy;
-    sortField[sortBy] = sortValue;
+    // var sortField = {};
+    // var sortBy = sortBy;
+    // sortField[sortBy] = sortValue;
   
-    if (supplierId) {
-      scf.log("supplierId =>>", supplierId);
-      condition["supplierId"] = supplierId;
-    }
+    // if (supplierId) {
+    //   scf.log("supplierId =>>", supplierId);
+    //   condition["supplierId"] = supplierId;
+    // }
   
-    if (searchBy == null && supplierId == null) {
-      condition["status"] = { '$ne': "Discard" };
-    }
+    // if (searchBy == null && supplierId == null) {
+    //   condition["status"] = { '$ne': "Discard" };
+    // }
   
-    return crud.getData(config.connectionString, config.dbName, collectionName, condition, sortField, paramNotReq);
+    return crud.getData(config.connectionString, config.dbName, collectionName, condition, paramNotReq);
   }
 
   // exports.getInvoice = function(req, id) {
@@ -163,19 +178,24 @@ exports.updateInvoiceStatus = function (id, body) {
 
   // get data by id
 
-exports.getInvoiceById = function (req,id) {
+exports.getInvoiceById = function (req, id) {
   var condition = {};
-  if (id) {
-    condition["id"] = id;
-  }
-  var paramNotReq = {
-    _id: 0
-  };
-  var sortField = {};
+  //if (id) {
+    condition["id"] = req.query.id;
+    crud.readByCondition(config.connectionString, config.dbName, collectionName, condition, paramNotReq)
+    .then(data => {
+      deferred.resolve(data)
+        }) .catch(err => {
+        deferred.reject(err)
+        })
+  //}
+  console.log("InvoiceId: ", id);
+  var paramNotReq = {};
+  //var sortField = {};
   //return baseService.fetchPermissionEnabledDocuments(req,collectionName,condition, sortField, paramNotReq);
     
   //  Get (Get data from MongoDB)
-  return crud.getData(config.connectionString, config.dbName, collectionName, condition, sortField, paramNotReq);
+  return crud.getData(config.connectionString, config.dbName, collectionName, condition, paramNotReq);
 
 }
 

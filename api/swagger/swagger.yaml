@@ -254,11 +254,6 @@ paths:
         description: ""
         required: true
         type: "string"
-      - name: status
-        description: ""
-        type: string
-        in: query
-        required: true
       responses:
         200:
           description: "successful operation"
@@ -297,8 +292,8 @@ paths:
           description: "For eg; status = Accepted/Discard"
           required: true
           schema:
-              # a pointer to a definition
-              $ref: "#/definitions/patchBody"
+            # a pointer to a definition
+            $ref: "#/definitions/patchBody"
       responses:
         200:
           description: "successful operation"
@@ -331,11 +326,11 @@ paths:
       produces:
       - "application/json"
       parameters:
-      # - name: invoiceNumber
-      #   in: query
-      #   description: ""
-      #   required: true
-      #   type: string
+      - name: invoiceNumber
+        in: query
+        description: ""
+        required: true
+        type: string
       - name: searchBy
         in: query
         description: "search by id"
@@ -343,14 +338,14 @@ paths:
         type: string
       - name: sortBy
         in: query
-        description: "sort by name"
+        description: "sort by field name For e.g. invoiceNumber_desc or invoiceNumber_asc"
         required: false
         type: string
-      - name: supplierId
-        in: query
-        description: "search by supplier Id"
-        required: false
-        type: string
+      # - name: supplierId
+      #   in: query
+      #   description: "search by supplier Id"
+      #   required: false
+      #   type: string
       responses:
         200:
           description: "Success"
@@ -403,30 +398,6 @@ paths:
           description: "Not Found"
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /bankRegistration:
-    x-swagger-router-controller: bankRegistration
-    post:
-      tags:
-      - "Apply Loan"
-      summary: "Applying loan on the basis of invoices"
-      description: ""
-      operationId: "applyLoan"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Here you can apply loan on saved invoices"
-          required: true
-          schema:
-            $ref: "#/definitions/applyLoan"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/apiResponse"
-        400:
-          description: Validation error
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

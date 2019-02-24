@@ -92,11 +92,11 @@ function deleteInvoice(req, res, next) {
 
 function getInvoice(req, res, next) {
 
-      // var invoiceNumber = req.swagger.params.invoiceNumber.value;
+      var invoiceNumber = req.swagger.params.invoiceNumber.value;
       var sort = req.swagger.params.sortBy.value || config.sortBy;
       var searchBy = req.swagger.params.searchBy.value;
-      var supplierId = req.swagger.params.supplierId.value;
-      InvoiceService.getInvoice(sort, searchBy,supplierId)
+      //var supplierId = req.swagger.params.supplierId.value;
+      InvoiceService.getInvoice(invoiceNumber,sort, searchBy)
         .then(function (response) {
           res.json(response);
         })
@@ -110,7 +110,7 @@ function getInvoice(req, res, next) {
   function getInvoiceById(req, res, next) {
   
         var id = req.swagger.params.id.value;
-        InvoiceService.getInvoiceById(req,id)
+        InvoiceService.getInvoiceById(req, id)
           .then(function (response) {
             res.json(response[0]);
           })
