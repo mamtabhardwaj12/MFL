@@ -14,7 +14,6 @@ var loanService = require('../services/applyLoanService');
 
 function applyLoan(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  console.log("Request:",req.body);
   loanService.applyLoan(req.body).then(function (response) {
     res.json(response);
   })

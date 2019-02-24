@@ -422,6 +422,38 @@
 						}
 					}
 				}
+		  }
+		}
+	  },
+	  "/userRegistration/bankUser": {
+		"x-swagger-router-controller": "bankUserRegistration",
+		"post": {
+		  "tags": [
+			"Registration"
+		  ],
+		  "summary": "Create user for organisation",
+		  "description": "",
+		  "operationId": "createBankUser",
+		  "produces": [
+			"application/json"
+		  ],
+		  "parameters": [
+			{
+			  "in": "body",
+			  "name": "body",
+			  "description": "Here you can create the new account",
+			  "required": true,
+			  "schema": {
+				"$ref": "#/definitions/bankUserRegistration"
+			  }
+			}
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "successful operation",
+			  "schema": {
+				"$ref": "#/definitions/apiResponse"
+			  }
 			},
 			"get": {
 				"tags": [
@@ -820,4 +852,5 @@
 			}
 		}
 	}
+}
 }
