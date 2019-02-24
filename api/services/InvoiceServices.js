@@ -7,6 +7,8 @@ var crud = require('../utils/CrudServices');
 
 var MODULES = require('../helpers/module');
 const STATUSCODES=MODULES.STATUSCODES();
+var paramNotReq = {};
+
 
 exports.invoice = function (req, body) {
 

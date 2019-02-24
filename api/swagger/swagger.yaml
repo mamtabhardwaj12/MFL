@@ -344,8 +344,7 @@ paths:
           schema:
             $ref: "#/definitions/apiResponse"
         400:
-          description: Validation error
-            
+          description: Validation error 
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -412,7 +411,6 @@ definitions:
         type: "string"
       message:
         type: "string"
-        type: string
   bankUserRegistration:
     properties:
       id:
@@ -457,7 +455,6 @@ definitions:
           type: string
       mobile:
         type: "string"
-      
   bankRegistration:
     properties:
       id:
@@ -481,7 +478,7 @@ definitions:
       gstNo:
         type: string
       email:
-          type: string
+        type: string
       natureOfBusinessId:
         type: integer
       natureOfBusinessName:
