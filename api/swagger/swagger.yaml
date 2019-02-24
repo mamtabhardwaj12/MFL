@@ -353,15 +353,23 @@ paths:
       summary: "On-boarding organisation"
       description: ""
       operationId: "createOrg"
+  /applyLoan:
+    x-swagger-router-controller: applyLoan
+    post:
+      tags:
+      - "Apply Loan"
+      summary: "Applying loan on the basis of invoices"
+      description: ""
+      operationId: "applyLoan"
       produces:
       - "application/json"
       parameters:
         - in: "body"
           name: "body"
-          description: "Here you can create Organisations"
+          description: "Here you can apply loan on saved invoices"
           required: true
           schema:
-            $ref: "#/definitions/orgRegistration"
+            $ref: "#/definitions/applyloan"
       responses:
         200:
           description: "successful operation"
@@ -369,7 +377,6 @@ paths:
             $ref: "#/definitions/apiResponse"
         400:
           description: Validation error
-  
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -412,6 +419,23 @@ definitions:
       isActive:
         type: boolean
         default: true
+  applyloan:
+    properties:
+      id:
+        type: string
+      supplierName:
+        type: "string"
+      supplierId:
+        type: "string"
+      invoiceDate:
+        type: "string"
+      invoiceNumber:
+        type: string
+      gstNumber:
+        type: string
+      loanAmount:
+        type: string
+      
   patchBody:
     type: object
     properties:
