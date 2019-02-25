@@ -385,6 +385,19 @@ paths:
           description: ""
           required: true
           type: string
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /applyLoan:
     x-swagger-router-controller: applyLoan
     post:
